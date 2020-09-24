@@ -11,6 +11,7 @@ public class CameraBarycentrique : MonoBehaviour
     private GameObject BarycentreGO;
     public Material defaultElementMaterial;
     public Material safeZoneElementMaterial;
+    Camera cam;
     GameObject DebugZoomLimit1;
     GameObject DebugZoomLimit2;
     GameObject DebugZoomLimit3;
@@ -26,7 +27,7 @@ public class CameraBarycentrique : MonoBehaviour
 
     void Start()
     {
-        
+        cam = GetComponent<Camera>();
     }
 
     void Update()
@@ -126,10 +127,9 @@ public class CameraBarycentrique : MonoBehaviour
 
     void ZoomDezoom()
     {
-        Camera cam = GetComponent<Camera>();
         Vector3 cameraLowerLeft = cam.ScreenToWorldPoint(new Vector3(0, 0, 0));
-        Vector3 cameraLowerRight = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0));
-        Vector3 cameraUpperLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
+        Vector3 cameraLowerRight = cam.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0));
+        Vector3 cameraUpperLeft = cam.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
         Vector3 cameraUpperRight = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         float marginIn = 3f;
         float marginOut = 2f;
