@@ -127,6 +127,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
+        type: 3}
+      propertyPath: BarycentreWeight
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476993, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
       propertyPath: m_Name
@@ -280,6 +285,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
+        type: 3}
+      propertyPath: BarycentreWeight
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476993, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
       propertyPath: m_Name
@@ -349,6 +359,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
+        type: 3}
+      propertyPath: BarycentreWeight
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476993, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
       propertyPath: m_Name
@@ -509,6 +524,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
+        type: 3}
+      propertyPath: BarycentreWeight
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476993, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
       propertyPath: m_Name
