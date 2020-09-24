@@ -202,26 +202,6 @@ public class CameraBarycentrique : MonoBehaviour
         {
             cam.orthographicSize += 0.1f; // dezoom
         }
-
-        bool a1 = cameraLowerLeft.z + marginOut > minZ;
-        bool a2 = cameraLowerLeft.z + marginOut > minZ;
-        bool a3 = cameraLowerRight.x - marginOut < maxX;
-        bool a4 = cameraLowerRight.z + marginOut > minZ;
-        bool a5 = cameraUpperLeft.x + marginOut > minZ;
-        bool a6 = cameraUpperLeft.z - marginOut < maxZ;
-        bool a7 = cameraUpperRight.x - marginOut < maxX;
-        bool a8 = cameraUpperRight.z - marginOut < maxZ;
-
-        Debug.Log("BEGIN");
-        Debug.Log("cameraLowerLeft.x + marginOut > minX ? " + a1);
-        Debug.Log("cameraLowerLeft.z + marginOut > minZ ? " + a2);
-        Debug.Log("cameraLowerRight.x - marginOut < maxX ? " + a3);
-        Debug.Log("cameraLowerRight.z + marginOut > minZ ? " + a4);
-        Debug.Log("cameraUpperLeft.x + marginOut > minZ ? " + a5);
-        Debug.Log("cameraUpperLeft.z - marginOut < maxZ ? " + a6);
-        Debug.Log("cameraUpperRight.x - marginOut < maxX ? " + a7);
-        Debug.Log("cameraUpperRight.z - marginOut < maxZ ? " + a8);
-        Debug.Log("END");
     }
 
     // set camera postion to barycentre position
