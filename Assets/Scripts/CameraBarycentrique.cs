@@ -11,18 +11,18 @@ public class CameraBarycentrique : MonoBehaviour
     private GameObject BarycentreGO;
     public Material defaultElementMaterial;
     public Material safeZoneElementMaterial;
-    GameObject go1;
-    GameObject go2;
-    GameObject go3;
-    GameObject go4;
-    GameObject go5;
-    GameObject go6;
-    GameObject go7;
-    GameObject go8;
-    GameObject b1;
-    GameObject b2;
-    GameObject b3;
-    GameObject b4;
+    GameObject DebugZoomLimit1;
+    GameObject DebugZoomLimit2;
+    GameObject DebugZoomLimit3;
+    GameObject DebugZoomLimit4;
+    GameObject DebugDezoomLimit5;
+    GameObject DebugDezoomLimit6;
+    GameObject DebugDezoomLimit7;
+    GameObject DebugDezoomLimit8;
+    GameObject DebugElementsLimit1;
+    GameObject DebugElementsLimit2;
+    GameObject DebugElementsLimit3;
+    GameObject DebugElementsLimit4;
 
     void Start()
     {
@@ -132,7 +132,7 @@ public class CameraBarycentrique : MonoBehaviour
         Vector3 cameraUpperLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, Screen.height, 0));
         Vector3 cameraUpperRight = cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         float marginIn = 3f;
-        float marginOut = 1f;
+        float marginOut = 2f;
         float minX = 0;
         float minZ = 0;
         float maxX = 0;
@@ -144,38 +144,6 @@ public class CameraBarycentrique : MonoBehaviour
             if (elements[i].transform.position.x > maxX) maxX = elements[i].transform.position.x;
             if (elements[i].transform.position.z > maxZ) maxZ = elements[i].transform.position.z;
         }
-        Destroy(b1);
-        Destroy(b2);
-        Destroy(b3);
-        Destroy(b4);
-        b1 = Instantiate(BarycentrePrefab, new Vector3(minX, 0, minZ), BarycentrePrefab.transform.rotation);
-        b2 = Instantiate(BarycentrePrefab, new Vector3(minX, 0, maxZ), BarycentrePrefab.transform.rotation);
-        b3 = Instantiate(BarycentrePrefab, new Vector3(maxX, 0, minZ), BarycentrePrefab.transform.rotation);
-        b4 = Instantiate(BarycentrePrefab, new Vector3(maxX, 0, maxZ), BarycentrePrefab.transform.rotation);
-        Destroy(go1);
-        Destroy(go2);
-        Destroy(go3);
-        Destroy(go4);
-        go1 = Instantiate(BarycentrePrefab, new Vector3(cameraLowerLeft.x + marginIn, 0, cameraLowerLeft.z + marginIn), BarycentrePrefab.transform.rotation);
-        go2 = Instantiate(BarycentrePrefab, new Vector3(cameraLowerLeft.x + marginIn, 0, cameraUpperRight.z - marginIn), BarycentrePrefab.transform.rotation);
-        go3 = Instantiate(BarycentrePrefab, new Vector3(cameraUpperRight.x - marginIn, 0, cameraLowerLeft.z + marginIn), BarycentrePrefab.transform.rotation);
-        go4 = Instantiate(BarycentrePrefab, new Vector3(cameraUpperRight.x - marginIn, 0, cameraUpperRight.z - marginIn), BarycentrePrefab.transform.rotation);
-        go1.GetComponent<Renderer>().material = defaultElementMaterial;
-        go2.GetComponent<Renderer>().material = defaultElementMaterial;
-        go3.GetComponent<Renderer>().material = defaultElementMaterial;
-        go4.GetComponent<Renderer>().material = defaultElementMaterial;
-        Destroy(go5);
-        Destroy(go6);
-        Destroy(go7);
-        Destroy(go8);
-        go5 = Instantiate(BarycentrePrefab, new Vector3(cameraLowerLeft.x + marginOut, 0, cameraLowerLeft.z + marginOut), BarycentrePrefab.transform.rotation);
-        go6 = Instantiate(BarycentrePrefab, new Vector3(cameraLowerLeft.x + marginOut, 0, cameraUpperRight.z - marginOut), BarycentrePrefab.transform.rotation);
-        go7 = Instantiate(BarycentrePrefab, new Vector3(cameraUpperRight.x - marginOut, 0, cameraLowerLeft.z + marginOut), BarycentrePrefab.transform.rotation);
-        go8 = Instantiate(BarycentrePrefab, new Vector3(cameraUpperRight.x - marginOut, 0, cameraUpperRight.z - marginOut), BarycentrePrefab.transform.rotation);
-        go5.GetComponent<Renderer>().material = safeZoneElementMaterial;
-        go6.GetComponent<Renderer>().material = safeZoneElementMaterial;
-        go7.GetComponent<Renderer>().material = safeZoneElementMaterial;
-        go8.GetComponent<Renderer>().material = safeZoneElementMaterial;
         if (
             cameraLowerLeft.x + marginIn < minX
             && cameraLowerLeft.z + marginIn < minZ
@@ -202,6 +170,43 @@ public class CameraBarycentrique : MonoBehaviour
         {
             cam.orthographicSize += 0.1f; // dezoom
         }
+
+        // VISUAL DEBUG
+        /*
+        Destroy(DebugElementsLimit1);
+        Destroy(DebugElementsLimit2);
+        Destroy(DebugElementsLimit3);
+        Destroy(DebugElementsLimit4);
+        DebugElementsLimit1 = Instantiate(BarycentrePrefab, new Vector3(minX, 0, minZ), BarycentrePrefab.transform.rotation);
+        DebugElementsLimit2 = Instantiate(BarycentrePrefab, new Vector3(minX, 0, maxZ), BarycentrePrefab.transform.rotation);
+        DebugElementsLimit3 = Instantiate(BarycentrePrefab, new Vector3(maxX, 0, minZ), BarycentrePrefab.transform.rotation);
+        DebugElementsLimit4 = Instantiate(BarycentrePrefab, new Vector3(maxX, 0, maxZ), BarycentrePrefab.transform.rotation);
+        */
+        Destroy(DebugZoomLimit1);
+        Destroy(DebugZoomLimit2);
+        Destroy(DebugZoomLimit3);
+        Destroy(DebugZoomLimit4);
+        DebugZoomLimit1 = Instantiate(BarycentrePrefab, new Vector3(cameraLowerLeft.x + marginIn, 0, cameraLowerLeft.z + marginIn), BarycentrePrefab.transform.rotation);
+        DebugZoomLimit2 = Instantiate(BarycentrePrefab, new Vector3(cameraLowerLeft.x + marginIn, 0, cameraUpperRight.z - marginIn), BarycentrePrefab.transform.rotation);
+        DebugZoomLimit3 = Instantiate(BarycentrePrefab, new Vector3(cameraUpperRight.x - marginIn, 0, cameraLowerLeft.z + marginIn), BarycentrePrefab.transform.rotation);
+        DebugZoomLimit4 = Instantiate(BarycentrePrefab, new Vector3(cameraUpperRight.x - marginIn, 0, cameraUpperRight.z - marginIn), BarycentrePrefab.transform.rotation);
+        DebugZoomLimit1.GetComponent<Renderer>().material = defaultElementMaterial;
+        DebugZoomLimit2.GetComponent<Renderer>().material = defaultElementMaterial;
+        DebugZoomLimit3.GetComponent<Renderer>().material = defaultElementMaterial;
+        DebugZoomLimit4.GetComponent<Renderer>().material = defaultElementMaterial;
+        Destroy(DebugDezoomLimit5);
+        Destroy(DebugDezoomLimit6);
+        Destroy(DebugDezoomLimit7);
+        Destroy(DebugDezoomLimit8);
+        DebugDezoomLimit5 = Instantiate(BarycentrePrefab, new Vector3(cameraLowerLeft.x + marginOut, 0, cameraLowerLeft.z + marginOut), BarycentrePrefab.transform.rotation);
+        DebugDezoomLimit6 = Instantiate(BarycentrePrefab, new Vector3(cameraLowerLeft.x + marginOut, 0, cameraUpperRight.z - marginOut), BarycentrePrefab.transform.rotation);
+        DebugDezoomLimit7 = Instantiate(BarycentrePrefab, new Vector3(cameraUpperRight.x - marginOut, 0, cameraLowerLeft.z + marginOut), BarycentrePrefab.transform.rotation);
+        DebugDezoomLimit8 = Instantiate(BarycentrePrefab, new Vector3(cameraUpperRight.x - marginOut, 0, cameraUpperRight.z - marginOut), BarycentrePrefab.transform.rotation);
+        DebugDezoomLimit5.GetComponent<Renderer>().material = safeZoneElementMaterial;
+        DebugDezoomLimit6.GetComponent<Renderer>().material = safeZoneElementMaterial;
+        DebugDezoomLimit7.GetComponent<Renderer>().material = safeZoneElementMaterial;
+        DebugDezoomLimit8.GetComponent<Renderer>().material = safeZoneElementMaterial;
+
     }
 
     // set camera postion to barycentre position
