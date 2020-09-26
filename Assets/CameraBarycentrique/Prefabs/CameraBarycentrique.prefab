@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BarycentrePrefab: {fileID: 65944984176800013, guid: 59d5efb44a190fe4ebbcb52cacb18198,
     type: 3}
-  defaultElementMaterial: {fileID: 2100000, guid: d050b9b1b714c4a49a9875aa08ff2e8e,
+  DefaultElementMaterial: {fileID: 2100000, guid: d050b9b1b714c4a49a9875aa08ff2e8e,
     type: 2}
-  safeZoneElementMaterial: {fileID: 2100000, guid: 3f3f4c1e491966b448996cd69a6b8f62,
+  SafeZoneElementMaterial: {fileID: 2100000, guid: 3f3f4c1e491966b448996cd69a6b8f62,
     type: 2}
