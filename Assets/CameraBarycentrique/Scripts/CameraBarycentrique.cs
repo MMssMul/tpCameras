@@ -208,7 +208,7 @@ public class CameraBarycentrique : MonoBehaviour
             && cameraLowerLeft.z + marginZoom < minZ
             && cameraLowerRight.x - marginZoom > maxX
             && cameraLowerRight.z + marginZoom < minZ
-            && cameraUpperLeft.x + marginZoom < minZ
+            && cameraUpperLeft.x + marginZoom < minX
             && cameraUpperLeft.z - marginZoom > maxZ
             && cameraUpperRight.x - marginZoom > maxX
             && cameraUpperRight.z - marginZoom > maxZ
