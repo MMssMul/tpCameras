@@ -85,7 +85,7 @@ public class CameraBarycentrique : MonoBehaviour
     }
 
     // calculate the barycentre
-    Vector3 GetBarycentre()
+    Vector2 GetBarycentre()
     {
         SumInversesDistancesToOtherObjects();
         float sumBarycentrePoint = 0;
@@ -104,7 +104,6 @@ public class CameraBarycentrique : MonoBehaviour
         }
 
         float barycentreX;
-        float barycentreY = 0;
         float barycentreZ;
         if (sumBarycentrePoint == 0) // avoid division by zero
         {
@@ -116,19 +115,18 @@ public class CameraBarycentrique : MonoBehaviour
             barycentreZ = sumPositionsZ / sumBarycentrePoint;
         }
 
-        Vector3 barycentre = new Vector3(barycentreX, barycentreY, barycentreZ);
-        ShowBarycentre(barycentre);
+        Vector2 barycentre = new Vector2(barycentreX, barycentreZ);
         return barycentre;
     }
 
     // show barycentre position
-    void ShowBarycentre(Vector3 barycentrePosition)
+    void ShowBarycentre(Vector2 barycentrePosition)
     {
         if (BarycentreGO != null)
         {
             Destroy(BarycentreGO); // reset barycentreGO
         }
-        BarycentreGO = Instantiate(BarycentrePrefab, barycentrePosition, BarycentrePrefab.transform.rotation);
+        BarycentreGO = Instantiate(BarycentrePrefab, new Vector3(barycentrePosition.x, 0, barycentrePosition.y), BarycentrePrefab.transform.rotation);
     }
 
     // set camera postion to barycentre position
@@ -137,11 +135,12 @@ public class CameraBarycentrique : MonoBehaviour
         SetElements();
         if(Elements.Length > 0)
         {
-            Vector3 barycentrePosition = GetBarycentre();
+            Vector2 barycentrePosition = GetBarycentre();
+            ShowBarycentre(barycentrePosition);
 
             // set new camera position
             Vector3 targetCameraPosition;
-            targetCameraPosition = new Vector3(barycentrePosition.x, transform.position.y, barycentrePosition.z); // do not change camera Y position
+            targetCameraPosition = new Vector3(barycentrePosition.x, transform.position.y, barycentrePosition.y); // do not change camera Y position
             float travelDuration = 2; // travel time in seconds to lerp the camera
             transform.position = Vector3.Lerp(transform.position, targetCameraPosition, Time.deltaTime * travelDuration); // lerp camera position to the barycentre position
 
