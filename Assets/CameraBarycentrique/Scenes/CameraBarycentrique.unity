@@ -127,15 +127,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
-        type: 3}
-      propertyPath: BarycentreWeight
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476993, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
       propertyPath: m_Name
       value: Element (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
+        type: 3}
+      propertyPath: BarycentreWeight
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476997, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
@@ -201,6 +201,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 836874842420713278, guid: e78c1be307a886e45be4c8a54e59ed3f,
+        type: 3}
+      propertyPath: m_Name
+      value: CameraBarycentrique
+      objectReference: {fileID: 0}
+    - target: {fileID: 836874842420713278, guid: e78c1be307a886e45be4c8a54e59ed3f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6231406688612929264, guid: e78c1be307a886e45be4c8a54e59ed3f,
         type: 3}
       propertyPath: defaultElementMaterial
@@ -211,11 +221,6 @@ PrefabInstance:
       propertyPath: elementMaterialSafeZone
       value: 
       objectReference: {fileID: 2100000, guid: 3f3f4c1e491966b448996cd69a6b8f62, type: 2}
-    - target: {fileID: 836874842420713278, guid: e78c1be307a886e45be4c8a54e59ed3f,
-        type: 3}
-      propertyPath: m_Name
-      value: CameraBarycentrique
-      objectReference: {fileID: 0}
     - target: {fileID: 836874842420713251, guid: e78c1be307a886e45be4c8a54e59ed3f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -285,15 +290,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
-        type: 3}
-      propertyPath: BarycentreWeight
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476993, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
       propertyPath: m_Name
       value: Element (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
+        type: 3}
+      propertyPath: BarycentreWeight
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476997, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
@@ -359,15 +364,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
-        type: 3}
-      propertyPath: BarycentreWeight
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476993, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
       propertyPath: m_Name
       value: Element
+      objectReference: {fileID: 0}
+    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
+        type: 3}
+      propertyPath: BarycentreWeight
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476997, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
@@ -524,15 +529,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
-        type: 3}
-      propertyPath: BarycentreWeight
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476993, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}
       propertyPath: m_Name
       value: Element (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 509313805272822035, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
+        type: 3}
+      propertyPath: BarycentreWeight
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3209355313828476997, guid: 0709ac8f4ff937048807e5b9f7fc7ffd,
         type: 3}

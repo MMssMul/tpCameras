@@ -108,8 +108,8 @@ public class CameraBarycentrique : MonoBehaviour
         float barycentreZ;
         if (sumBarycentrePoint == 0) // avoid division by zero
         {
-            barycentreX = 0;
-            barycentreZ = 0;
+            barycentreX = Elements[0].transform.position.x;
+            barycentreZ = Elements[0].transform.position.z;
         } else
         {
             barycentreX = sumPositionsX / sumBarycentrePoint;
@@ -135,15 +135,18 @@ public class CameraBarycentrique : MonoBehaviour
     void LookAt()
     {
         SetElements();
-        Vector3 barycentrePosition = GetBarycentre();
+        if(Elements.Length > 0)
+        {
+            Vector3 barycentrePosition = GetBarycentre();
 
-        // set new camera position
-        Vector3 targetCameraPosition;
-        targetCameraPosition = new Vector3(barycentrePosition.x, transform.position.y, barycentrePosition.z); // do not change camera Y position
-        float travelDuration = 2; // travel time in seconds to lerp the camera
-        transform.position = Vector3.Lerp(transform.position, targetCameraPosition, Time.deltaTime * travelDuration); // lerp camera position to the barycentre position
+            // set new camera position
+            Vector3 targetCameraPosition;
+            targetCameraPosition = new Vector3(barycentrePosition.x, transform.position.y, barycentrePosition.z); // do not change camera Y position
+            float travelDuration = 2; // travel time in seconds to lerp the camera
+            transform.position = Vector3.Lerp(transform.position, targetCameraPosition, Time.deltaTime * travelDuration); // lerp camera position to the barycentre position
 
-        ZoomDezoom();
+            ZoomDezoom();
+        }
     }
 
     // check if the target position in inside the safe zone area
@@ -189,11 +192,11 @@ public class CameraBarycentrique : MonoBehaviour
         Vector3 cameraUpperRight = Cam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         float marginZoom = 3f; // margin distance on camera view to determinate bounds to zoom
         float marginDezoom = 2f; // margin distance on camera view to determinate bounds to dezoom
-        float minX = 0;
-        float minZ = 0;
-        float maxX = 0;
-        float maxZ = 0;
-        for (int i = 0; i < Elements.Length; i++) // determinate bounds around elements inside the safe zone area
+        float minX = Elements[0].transform.position.x;
+        float minZ = Elements[0].transform.position.z;
+        float maxX = Elements[0].transform.position.x;
+        float maxZ = Elements[0].transform.position.z;
+        for (int i = 1; i < Elements.Length; i++) // determinate bounds around elements inside the safe zone area
         {
             if (Elements[i].transform.position.x < minX) minX = Elements[i].transform.position.x;
             if (Elements[i].transform.position.z < minZ) minZ = Elements[i].transform.position.z;
@@ -218,7 +221,7 @@ public class CameraBarycentrique : MonoBehaviour
             || cameraLowerLeft.z + marginDezoom > minZ
             || cameraLowerRight.x - marginDezoom < maxX
             || cameraLowerRight.z + marginDezoom > minZ
-            || cameraUpperLeft.x + marginDezoom > minZ
+            || cameraUpperLeft.x + marginDezoom > minX
             || cameraUpperLeft.z - marginDezoom < maxZ
             || cameraUpperRight.x - marginDezoom < maxX
             || cameraUpperRight.z - marginDezoom < maxZ
