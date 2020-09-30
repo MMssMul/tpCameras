@@ -42,15 +42,15 @@ public class CameraSatellite : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
             {
-                RotateCameraAroundPivot(LEFT_STEP_ROTATION);
+                RotateCameraPivot(LEFT_STEP_ROTATION);
             }
             else if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyDown(KeyCode.RightAlt))
             {
-                RotateCameraAroundPivot(RIGHT_STEP_ROTATION);
+                RotateCameraPivot(RIGHT_STEP_ROTATION);
             }
             else
             {
-                RotateCameraAroundPivot(FREE_ROTATION);
+                RotateCameraPivot(FREE_ROTATION);
             }
         }
 
@@ -62,48 +62,65 @@ public class CameraSatellite : MonoBehaviour
         }
     }
 
-    void RotateCameraAroundPivot(int RotationMode)
+    void RotateCameraPivot(int RotationMode)
     {
-        if(RotationMode == RIGHT_STEP_ROTATION)
+        SetTheta(RotationMode);
+        SetPhi();
+        SetRho();
+
+        CamLocalRotation.x += Theta;
+        CamLocalRotation.y = Mathf.Clamp(CamLocalRotation.y + Phi, PhiMin, PhiMax);
+
+        Quaternion Rotation = Quaternion.Euler(CamLocalRotation.y, CamLocalRotation.x, 0); // define the quaternion rotation for the pivot
+
+        Pivot.transform.rotation = Quaternion.Lerp(Pivot.transform.rotation, Rotation, Time.deltaTime); // rotate pivot, and so the camera attached will follow
+
+        Cam.transform.localPosition = new Vector3(0f, 0f, Mathf.Lerp(Cam.transform.localPosition.z, Rho * -1f, Time.deltaTime)); // zoom or unzoom camera using local position z axis to move
+
+        Debug.Log("CamLocalRotation.x = " + CamLocalRotation.x);
+        Debug.Log("CamLocalRotation.y = " + CamLocalRotation.y);
+    }
+
+    private void SetPhi()
+    {
+        Phi = Input.GetAxis("Mouse Y");
+    }
+
+    private void SetRho()
+    {
+        float ZoomAxis = Input.GetAxis("Mouse ScrollWheel");
+        if (ZoomAxis > 0)
         {
-            float k = CamLocalRotation.x;
-            if (k < 0) k *= -1; // get positive value
-            k = k - Mathf.Floor(k / RotationStep) * RotationStep; // modulo
-            if (CamLocalRotation.x <= 0) k = RotationStep - k;
-            if (k == 0) k = RotationStep;
-            CamLocalRotation.x -= k;
+            Rho = Mathf.Clamp(Rho + RhoStep, RhoMin, RhoMax); // dezoom
         }
-        else if(RotationMode == LEFT_STEP_ROTATION)
+        else if (ZoomAxis < 0)
         {
-            float k = CamLocalRotation.x;
-            if (k < 0) k *= -1; // get positive value
-            k = k - Mathf.Floor(k / RotationStep) * RotationStep; // modulo
-            if (CamLocalRotation.x >= 0) k = RotationStep - k;
-            if (k == 0) k = RotationStep;
-            CamLocalRotation.x += k;
+            Rho = Mathf.Clamp(Rho - RhoStep, RhoMin, RhoMax); // zoom
+        }
+    }
+
+    private void SetTheta(int RotationMode)
+    {
+        if (RotationMode == RIGHT_STEP_ROTATION)
+        {
+            Theta = CamLocalRotation.x;
+            if (Theta < 0) Theta *= -1; // get positive value
+            Theta = Theta - Mathf.Floor(Theta / RotationStep) * RotationStep; // modulo
+            if (CamLocalRotation.x <= 0) Theta = RotationStep - Theta;
+            if (Theta == 0) Theta = RotationStep;
+            Theta *= -1;
+        }
+        else if (RotationMode == LEFT_STEP_ROTATION)
+        {
+            Theta = CamLocalRotation.x;
+            if (Theta < 0) Theta *= -1; // get positive value
+            Theta = Theta - Mathf.Floor(Theta / RotationStep) * RotationStep; // modulo
+            if (CamLocalRotation.x >= 0) Theta = RotationStep - Theta;
+            if (Theta == 0) Theta = RotationStep;
         }
         else // RotationMode == FREE_ROTATION
         {
             Theta = Input.GetAxis("Mouse X");
-            CamLocalRotation.x += Theta;
         }
-        Phi = Input.GetAxis("Mouse Y");
-        CamLocalRotation.y = Mathf.Clamp(CamLocalRotation.y + Phi, PhiMin, PhiMax);
-        Debug.Log("CamLocalRotation.x = " + CamLocalRotation.x);
-        Debug.Log("CamLocalRotation.y = " + CamLocalRotation.y);
-        Quaternion Rotation = Quaternion.Euler(CamLocalRotation.y, CamLocalRotation.x, 0);
-        Pivot.transform.rotation = Quaternion.Lerp(Pivot.transform.rotation, Rotation, Time.deltaTime);
-
-        float ZoomAxis = Input.GetAxis("Mouse ScrollWheel");
-        if(ZoomAxis > 0)
-        {
-            Rho = Mathf.Clamp(Rho + RhoStep, RhoMin, RhoMax); // dezoom
-        }
-        else if(ZoomAxis < 0)
-        {
-            Rho = Mathf.Clamp(Rho - RhoStep, RhoMin, RhoMax); // zoom
-        }
-        
-        Cam.transform.localPosition = new Vector3(0f, 0f, Mathf.Lerp(Cam.transform.localPosition.z, Rho * -1f, Time.deltaTime));
     }
 }
