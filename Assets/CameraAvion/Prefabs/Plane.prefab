@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3809387472275687370}
   - component: {fileID: 3809387472275687365}
   m_Layer: 0
-  m_Name: Avion_LogicalObject
+  m_Name: Plane_LogicalObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 3809387473204243453}
   - component: {fileID: 3809387473204243426}
   m_Layer: 0
-  m_Name: Avion_GFXObject
+  m_Name: Plane_GFXObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,8 +132,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3809387473619643817}
+  - component: {fileID: 5936637119028968649}
   m_Layer: 0
-  m_Name: Avion
+  m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,3 +155,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5936637119028968649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3809387473619643822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a68827d5dfea64a9bc79ac6c7c102a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlaneLogicalObject: {fileID: 3809387472275687371}
+  m_PlaneGFXObject: {fileID: 3809387473204243424}
