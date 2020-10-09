@@ -2,6 +2,13 @@
 
 public class Plane : MonoBehaviour
 {
+    private const int DIRECTION_RIGHT = 1;
+    private const int DIRECTION_LEFT = -1;
+    private const int DIRECTION_UP = -1;
+    private const int DIRECTION_DOWN = 1;
+    private const int DIRECTION_ZERO = 0;
+
+
     [SerializeField] GameObject m_PlaneLogicalObject;
     [SerializeField] GameObject m_PlaneGFXObject;
 
@@ -72,33 +79,19 @@ public class Plane : MonoBehaviour
     {
         if(hDirection > 0) // rotate right
         {
-            /*
-            m_PlaneLogicalObject.transform.rotation = Quaternion.Slerp(
-                                                        m_PlaneLogicalObject.transform.rotation,
-                                                        Quaternion.RotateTowards(
-                                                            m_PlaneLogicalObject.transform.rotation,
-                                                           Quaternion.Inverse(m_PlaneLogicalObject.transform.rotation),
-                                                           10
-                                                        ),
-                                                        Time.deltaTime
-                                                      );
-            */
-            //m_PlaneLogicalObject.transform.RotateAround(transform.position, transform.up, Time.deltaTime * 90f);
-
-            RotateHeading(1);
+            RotateHeading(DIRECTION_RIGHT);
+            RotateBank(DIRECTION_RIGHT);
         }
         else if (hDirection < 0) // rotate left
         {
-            /*
-            m_PlaneLogicalObject.transform.rotation = Quaternion.Slerp(
-                                                        m_PlaneLogicalObject.transform.rotation,
-                                                        Quaternion.AngleAxis(-180, Vector3.up),
-                                                        Time.deltaTime
-                                                      );
-            */
-            RotateHeading(1);
+            RotateHeading(DIRECTION_LEFT);
+            RotateBank(DIRECTION_LEFT);
         }
-        // else hDirection == 0, do not rotate
+        else
+        {
+            // hDirection == 0, do not rotate heading
+            RotateBank(DIRECTION_ZERO);
+        }
     }
 
     // rotate the plane vertically
@@ -106,32 +99,37 @@ public class Plane : MonoBehaviour
     {
         if (vDirection > 0) // rotate top
         {
-            RotatePitch(-1);
+            RotatePitch(DIRECTION_UP);
         }
         else if (vDirection < 0) // rotate bottom
         {
-            RotatePitch(1);
+            RotatePitch(DIRECTION_DOWN);
         }
         // else vDirection == 0, do not rotate
     }
 
     // rotate the plane around the heading axis
-    private void RotateHeading(float direction)
+    private void RotateHeading(int direction)
     {
-        Quaternion rotation = Quaternion.AngleAxis(direction * Time.deltaTime * m_RotationMaxUpDown, m_PlaneLogicalObject.transform.up); // to rotation
+        Quaternion rotation = Quaternion.AngleAxis(direction * Time.deltaTime * m_RotationMaxUpDown, Vector3.up); // to rotation
         m_PlaneLogicalObject.transform.rotation *= Quaternion.Inverse(m_PlaneLogicalObject.transform.rotation)
                                                     * m_PlaneLogicalObject.transform.rotation
                                                     * rotation;
-        
     }
 
     // rotate the plane around the pitch axis
-    private void RotatePitch(float direction)
+    private void RotatePitch(int direction)
     {
         m_PlaneLogicalObject.transform.rotation = Quaternion.Slerp(
                                                         m_PlaneLogicalObject.transform.rotation,
                                                         Quaternion.AngleAxis(direction * m_RotationMaxUpDown, Vector3.right),
                                                         Time.deltaTime
                                                       );
+    }
+
+    // rotate the plane around the bank axis
+    private void RotateBank(int direction)
+    {
+
     }
 }
