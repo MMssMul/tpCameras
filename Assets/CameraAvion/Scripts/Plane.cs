@@ -11,6 +11,8 @@ public class Plane : MonoBehaviour
 
     [SerializeField] GameObject m_PlaneLogicalObject;
     [SerializeField] GameObject m_PlaneGFXObject;
+    [SerializeField] Transform m_CameraReachPosition;
+    [SerializeField] Transform m_CameraLookAtPosition;
 
     private float m_Speed; // plane flying speed
     private float m_SpeedMin; // min speed value
@@ -20,6 +22,7 @@ public class Plane : MonoBehaviour
     private float m_RotationMaxUpDownAngle; // max angle to rotate the plane up side or down side
     private float m_GfxMaxRotationAngle; // max angle to rotate the plane around the bank axis
     private Quaternion m_DefaultGfxQuaternion;
+    private Vector3 m_CameraLocalPosition;
 
     void Start()
     {
@@ -31,6 +34,8 @@ public class Plane : MonoBehaviour
         m_RotationMaxUpDownAngle = 90.0f;
         m_GfxMaxRotationAngle = 45.0f;
         m_DefaultGfxQuaternion = m_PlaneGFXObject.transform.rotation;
+        m_CameraLocalPosition = m_CameraReachPosition.position;
+        m_CameraLocalPosition = new Vector3(0, 2, -15);
     }
 
     void Update()
@@ -49,15 +54,15 @@ public class Plane : MonoBehaviour
     {
         Move();
 
-        int leftArrow = Input.GetKey(KeyCode.LeftArrow) ? 1 : 0;
-        int rightArrow = Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
-        float hInput = Input.GetAxis("Horizontal") - leftArrow + rightArrow; // intervalle [-1;1]
-        RotateHorizontally(hInput);
-
         int downArrow = Input.GetKey(KeyCode.DownArrow) ? 1 : 0;
         int upArrow = Input.GetKey(KeyCode.UpArrow) ? 1 : 0;
         float vInput = Input.GetAxis("Vertical") - downArrow + upArrow; // intervalle [-1;1]
         RotateVertically(vInput);
+
+        int leftArrow = Input.GetKey(KeyCode.LeftArrow) ? 1 : 0;
+        int rightArrow = Input.GetKey(KeyCode.RightArrow) ? 1 : 0;
+        float hInput = Input.GetAxis("Horizontal") - leftArrow + rightArrow; // intervalle [-1;1]
+        RotateHorizontally(hInput);
     }
 
     // increase the plane speed
@@ -116,11 +121,13 @@ public class Plane : MonoBehaviour
     private void RotateHeading(int direction)
     {
         Quaternion rotation = Quaternion.AngleAxis(direction * Time.deltaTime * m_RotationMaxUpDownAngle, Vector3.up); // to rotation
-        m_PlaneLogicalObject.transform.rotation *= Quaternion.Inverse(m_PlaneLogicalObject.transform.rotation)
+        Quaternion newRotation = Quaternion.Inverse(m_PlaneLogicalObject.transform.rotation)
                                                     * m_PlaneLogicalObject.transform.rotation
                                                     * rotation;
+        m_PlaneLogicalObject.transform.rotation *= newRotation;
+        m_CameraReachPosition.localPosition = Vector3.Lerp(m_CameraReachPosition.localPosition, m_CameraLocalPosition, Time.deltaTime * m_Speed);
     }
-
+    
     // rotate the plane around the pitch axis
     private void RotatePitch(int direction)
     {

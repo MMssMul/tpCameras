@@ -214,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 853025018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 1941521245}
   - component: {fileID: 1941521244}
   m_Layer: 0
-  m_Name: ThirdPersonCamera (1)
+  m_Name: ThirdPersonCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,6 +472,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1447640855321763091, guid: de144639e580d1a4d9e0142e6be8c229,
+        type: 3}
+      propertyPath: m_CameraReachPosition
+      value: 
+      objectReference: {fileID: 326931665}
+    - target: {fileID: 1447640855321763091, guid: de144639e580d1a4d9e0142e6be8c229,
+        type: 3}
+      propertyPath: m_CameraLookAtPosition
+      value: 
+      objectReference: {fileID: 1364680847}
     - target: {fileID: 9121571229331321352, guid: de144639e580d1a4d9e0142e6be8c229,
         type: 3}
       propertyPath: m_IsActive
