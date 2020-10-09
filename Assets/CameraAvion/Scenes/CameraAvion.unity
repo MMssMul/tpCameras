@@ -381,7 +381,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873112729}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: -9}
+  m_LocalPosition: {x: -6.8, y: 15, z: -20.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -459,5 +459,46 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300050, guid: f0b63cae18db7634b94da746c298055a, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 3809387472275687370, guid: fc48331609d0b724eb1f48e9a58ab1fd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809387472275687370, guid: fc48331609d0b724eb1f48e9a58ab1fd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809387472275687370, guid: fc48331609d0b724eb1f48e9a58ab1fd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809387473204243427, guid: fc48331609d0b724eb1f48e9a58ab1fd,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809387473204243427, guid: fc48331609d0b724eb1f48e9a58ab1fd,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3809387473204243427, guid: fc48331609d0b724eb1f48e9a58ab1fd,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 785770149304672976, guid: fc48331609d0b724eb1f48e9a58ab1fd,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2630122102349227039, guid: fc48331609d0b724eb1f48e9a58ab1fd,
+        type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7236613933694291882, guid: fc48331609d0b724eb1f48e9a58ab1fd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fc48331609d0b724eb1f48e9a58ab1fd, type: 3}

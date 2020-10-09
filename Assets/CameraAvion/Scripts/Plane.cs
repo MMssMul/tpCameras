@@ -17,7 +17,9 @@ public class Plane : MonoBehaviour
     private float m_SpeedMax; // max speed value
     private float m_SpeedAcceleration; // acceleration speed value : positive value
     private float m_SpeedDeceleration; // deceleration speed value : negative value
-    private float m_RotationMaxUpDown; // max angle to rotate the plane up side or down side
+    private float m_RotationMaxUpDownAngle; // max angle to rotate the plane up side or down side
+    private float m_GfxMaxRotationAngle; // max angle to rotate the plane around the bank axis
+    private Quaternion m_DefaultGfxQuaternion;
 
     void Start()
     {
@@ -26,7 +28,9 @@ public class Plane : MonoBehaviour
         m_Speed = m_SpeedMin;
         m_SpeedAcceleration = 0.5f;
         m_SpeedDeceleration = -0.2f;
-        m_RotationMaxUpDown = 90.0f;
+        m_RotationMaxUpDownAngle = 90.0f;
+        m_GfxMaxRotationAngle = 45.0f;
+        m_DefaultGfxQuaternion = m_PlaneGFXObject.transform.rotation;
     }
 
     void Update()
@@ -87,9 +91,9 @@ public class Plane : MonoBehaviour
             RotateHeading(DIRECTION_LEFT);
             RotateBank(DIRECTION_LEFT);
         }
-        else
+        if(hDirection == 0)
         {
-            // hDirection == 0, do not rotate heading
+            // do not rotate heading
             RotateBank(DIRECTION_ZERO);
         }
     }
@@ -111,7 +115,7 @@ public class Plane : MonoBehaviour
     // rotate the plane around the heading axis
     private void RotateHeading(int direction)
     {
-        Quaternion rotation = Quaternion.AngleAxis(direction * Time.deltaTime * m_RotationMaxUpDown, Vector3.up); // to rotation
+        Quaternion rotation = Quaternion.AngleAxis(direction * Time.deltaTime * m_RotationMaxUpDownAngle, Vector3.up); // to rotation
         m_PlaneLogicalObject.transform.rotation *= Quaternion.Inverse(m_PlaneLogicalObject.transform.rotation)
                                                     * m_PlaneLogicalObject.transform.rotation
                                                     * rotation;
@@ -122,7 +126,7 @@ public class Plane : MonoBehaviour
     {
         m_PlaneLogicalObject.transform.rotation = Quaternion.Slerp(
                                                         m_PlaneLogicalObject.transform.rotation,
-                                                        Quaternion.AngleAxis(direction * m_RotationMaxUpDown, Vector3.right),
+                                                        Quaternion.AngleAxis(direction * m_RotationMaxUpDownAngle, Vector3.right),
                                                         Time.deltaTime
                                                       );
     }
@@ -130,6 +134,22 @@ public class Plane : MonoBehaviour
     // rotate the plane around the bank axis
     private void RotateBank(int direction)
     {
-
+        if (direction != 0)
+        {
+            
+            m_PlaneGFXObject.transform.localRotation = Quaternion.Slerp(
+                                                        m_PlaneGFXObject.transform.localRotation,
+                                                        Quaternion.AngleAxis(-direction * m_GfxMaxRotationAngle, Vector3.forward),
+                                                        Time.deltaTime
+                                                    );
+        }
+        else
+        {
+            m_PlaneGFXObject.transform.rotation = Quaternion.RotateTowards(
+                                                    m_PlaneGFXObject.transform.rotation,
+                                                    m_PlaneLogicalObject.transform.rotation,
+                                                    Time.deltaTime * m_GfxMaxRotationAngle
+                                                    );
+        }
     }
 }
