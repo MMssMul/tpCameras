@@ -134,7 +134,7 @@ public class Plane : MonoBehaviour
     // rotate the plane around the bank axis
     private void RotateBank(int direction)
     {
-        if (direction != 0)
+        if (direction != 0) // bend on the right or left side
         {
             
             m_PlaneGFXObject.transform.localRotation = Quaternion.Slerp(
@@ -143,7 +143,7 @@ public class Plane : MonoBehaviour
                                                         Time.deltaTime
                                                     );
         }
-        else
+        else // getting back to the default rotation
         {
             m_PlaneGFXObject.transform.rotation = Quaternion.RotateTowards(
                                                     m_PlaneGFXObject.transform.rotation,
